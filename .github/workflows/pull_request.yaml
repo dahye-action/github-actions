@@ -1,5 +1,7 @@
  name: pull-request-workflow
- on: pull_request
+ on: 
+  pull_request:
+    types: [opened] #pull request가 open될때만 이벤트가 트리거되고, pull request 보낸 브랜치에 변경사항이 있을 때는 트리거되지 않게.
 
  jobs:
   pull-request-job:
