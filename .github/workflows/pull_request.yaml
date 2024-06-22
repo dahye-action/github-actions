@@ -1,14 +1,17 @@
  name: pull-request-workflow
- on: pull_request
+ on: 
+  pull_request:
+    types: [opened]
 
  jobs:
   pull-request-job:
     runs-on: ubuntu-latest
     steps: 
     - name: step1
-      run: echo pull request test2
+      run: echo pull request test3
     - name: step2 
       run: |
         echo hello world
         echo github action 
          
+
