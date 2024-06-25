@@ -29,5 +29,5 @@ jobs:
         echo github action
     - name: step3
       run: |
-        ehco ${{inputs.name}}
+        echo ${{inputs.name}}
         echo ${{inputs.environment}}
