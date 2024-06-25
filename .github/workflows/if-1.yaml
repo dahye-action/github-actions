@@ -8,13 +8,13 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
-    step:
+    steps:
     - name: get event name
       run: echo ${{github.event_name}}
 
   job2:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     if: github.event_name != 'push'
-    step:
+    steps:
     - name: get event name
       run: echo ${{github.event_name}}
