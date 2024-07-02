@@ -16,7 +16,7 @@ jobs:
 
     - name: get keyword
       id: get-keyword
-      run: |
+      run: | 
         echo level=Undefined >> $GITHUB_OUTPUT
         
         keywords=$(cat keyword-list.txt)
@@ -26,6 +26,6 @@ jobs:
           fi
         done  
       
-    - name: 
+    - name: get output
       run: |
         echo ${{ steps.get-keyword.outputs.level }}
