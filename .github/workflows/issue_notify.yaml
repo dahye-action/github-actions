@@ -1,4 +1,4 @@
-name: issu-notify
+name: issue-notify
 on: 
   issues: 
     types: [opened]
@@ -29,3 +29,33 @@ jobs:
     - name: get output
       run: |
         echo ${{ steps.get-keyword.outputs.level }}
+
+
+  slack:
+    needs: [get-keyword]
+    if: needs.get-keyword.outputs.level != 'Undefined'
+    runs-on: ubuntu-latest
+    environment: ${{ needs.get-keyword.outputs.level }} #enviroment에 따라 ${{ secrets.SLACK_WEBHOOK_URL }}이 달라지게
+    steps: 
+    - name: slack
+      uses: slackapi/slack-github-action@v1.24.0
+      with:
+        payload: |
+          {
+            "attachments": [
+              {
+                "pretext": "issue alert message",
+                "color": "28a745",
+                "fields": [
+                  {
+                    "title": Level : ${{ needs.get-keyword.outputs.level }},
+                    "short": true,
+                    "value": issue url : ${{ github.event.issue.html_url }}
+                  }
+                ]
+              }` 
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
