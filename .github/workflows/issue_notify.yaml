@@ -12,10 +12,8 @@ jobs:
       level: ${{ steps.get-keyword.outputs.level }}
 
     steps:
-
     - name: checkout #github repo code를 사용하기 위해
       uses: actions/checkout@v4
-
     - name: get keyword
       id: get-keyword
       run: | 
@@ -37,7 +35,12 @@ jobs:
     needs: [get-keyword]
     if: needs.get-keyword.outputs.level != 'Undefined'
     runs-on: ubuntu-latest
-    environment: ${{ needs.get-keyword.outputs.level }} #enviroment에 따라 ${{ secrets.SLACK_WEBHOOK_URL }}이 달라지게
+    #environment: ${{ needs.get-keyword.outputs.level }} #enviroment에 따라 ${{ secrets.SLACK_WEBHOOK_URL }}이 달라지게
+    strategy: 
+      matrix: 
+        environment: [${{needs.get-keyword.outputs.level}}]
+    environment: ${{ matrix.environment }} 
+
     steps: 
     - name: slack
       uses: slackapi/slack-github-action@v1.24.0
