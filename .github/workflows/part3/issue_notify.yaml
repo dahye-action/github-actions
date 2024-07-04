@@ -35,6 +35,7 @@ jobs:
     needs: [get-keyword]
     if: needs.get-keyword.outputs.level != 'Undefined'
     runs-on: ubuntu-latest
+    
     #environment: ${{ needs.get-keyword.outputs.level }} #enviroment에 따라 ${{ secrets.SLACK_WEBHOOK_URL }}이 달라지게
     strategy: 
       matrix: 
