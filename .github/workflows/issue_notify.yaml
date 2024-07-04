@@ -53,7 +53,7 @@ jobs:
                     "value": "issue url : ${{ github.event.issue.html_url }}"
                   }
                 ]
-              }` 
+              }
             ]
           }
       env:
