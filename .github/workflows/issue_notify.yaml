@@ -38,7 +38,7 @@ jobs:
     #environment: ${{ needs.get-keyword.outputs.level }} #enviroment에 따라 ${{ secrets.SLACK_WEBHOOK_URL }}이 달라지게
     strategy: 
       matrix: 
-        environment: [${{needs.get-keyword.outputs.level}}]
+        environment: ["${{ needs.get-keyword.outputs.level }}"]
     environment: ${{ matrix.environment }} 
 
     steps: 
